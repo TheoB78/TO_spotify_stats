@@ -1,0 +1,7 @@
+{
+  "name": "TO-spotify-stats",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
