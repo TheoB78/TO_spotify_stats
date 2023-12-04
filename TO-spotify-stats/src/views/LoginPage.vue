@@ -1,11 +1,14 @@
 <template>
     <ion-page>
         <ion-header>
-            test
+            <h2 class="center">
+                Login   
+            </h2>
         </ion-header>
         <ion-content>
-            <div>harrow</div>
-            <ion-button @click="requesUserAuth()">Login</ion-button>
+            <div class="center">
+                <ion-button @click="requesUserAuth()">Login</ion-button>
+            </div>
         </ion-content>
     </ion-page>
 </template>
@@ -28,7 +31,6 @@ export default {
     methods: {
         requesUserAuth() {
             api.auth.requestUserAuth()
-            alert(api.auth.getCodeFromUrl())
         }
     },
     setup() {
@@ -36,3 +38,9 @@ export default {
     }
 }
 </script>
+
+<style>
+    .middle {
+        margin-top: 50%;
+    }
+</style>

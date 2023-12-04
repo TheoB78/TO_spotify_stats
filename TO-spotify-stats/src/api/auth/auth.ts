@@ -1,5 +1,5 @@
 const clientId = '16dc2375b35a42afa791924a4e4eaa5d';
-const redirectUri = 'http://localhost:8100/login';
+const redirectUri = 'http://localhost:8100/tabs';
 
 export default {
     generateRandomString: function (length: number) {
