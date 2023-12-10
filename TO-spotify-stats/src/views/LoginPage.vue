@@ -1,11 +1,10 @@
 <template>
     <ion-page>
-        <ion-header>
+        <HeaderContainer/>
+        <ion-content>
             <h2 class="center">
                 Login   
             </h2>
-        </ion-header>
-        <ion-content>
             <div class="center">
                 <ion-button @click="requesUserAuth()">Login</ion-button>
             </div>
@@ -15,8 +14,8 @@
 
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import { IonPage, IonContent } from '@ionic/vue';
+import HeaderContainer from '@/components/HeaderContainer.vue';
 import api from '../api/api';
 
 export default {
@@ -30,12 +29,18 @@ export default {
 
     methods: {
         requesUserAuth() {
-            api.auth.requestUserAuth()
+            api.auth.requestUserAuth();
+            api.auth.getAccessToken();
         }
+
     },
     setup() {
         
-    }
+    },
+    components: {
+        HeaderContainer,
+        IonPage,
+    },
 }
 </script>
 

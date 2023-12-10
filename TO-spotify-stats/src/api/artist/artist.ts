@@ -1,13 +1,19 @@
-let testservice = "testerle";
-let haha = "lustig";
+class artist {
+    name: string;
+    image: any;
+    genres: any;
 
-let sayHello = function () {
-    alert('Hello')
+    constructor(name: string, image: any, genres: any) {
+        this.name = name;
+        this.image = image;
+        this.genres = genres;
+    }
+}
+
+function getTopArtists() {
+
 }
 
 export default {
-    testservice,
-    haha,
-    sayHello
-
+    artist,
 }
