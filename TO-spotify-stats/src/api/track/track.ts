@@ -24,14 +24,12 @@ async function getTopTracks() {
                 'Authorization' : `Bearera sdf ${localStorage.getItem('access_token')}`,
             }
         }).then((response) => {
-            alert('hijk')
         }
         ).catch((error) => {
             alert('errororororo')
             auth.apiCallErrorHandler(error)
         })
      } catch (error: any) {
-        alert('help')
         console.error('Error fetching users:', error.message);
      }
 }

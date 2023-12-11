@@ -18,7 +18,7 @@
           <ion-button @click="getTopTracks()">tracks</ion-button>
         </ion-item>
         <ion-item>
-          <ion-button @click="getRefreshToken()">broken</ion-button>
+          <ion-button @click="getRefreshToken()">token</ion-button>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -42,14 +42,17 @@ export default {
         },
         getTopTracks() {
             api.track.getTopTracks();
+        },
+        alertHI() {
+          alert('hi')
         }
     },
-    beforeMount() {
+    mounted() {
         api.auth.checkAuthorization();
     },
     components: { 
       HeaderContainer,
-      IonPage,
+      IonPage
     },
 }
 </script>

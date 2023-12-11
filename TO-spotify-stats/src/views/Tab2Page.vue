@@ -1,12 +1,25 @@
 <template>
   <ion-page id="main-content">
-    <HeaderContainer name="idono yet"/>
+    <HeaderContainer name="Recommendations"/>
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+<script lang="ts">
+import { IonPage } from '@ionic/vue';
 import HeaderContainer from '@/components/HeaderContainer.vue';
 
+export default {
+  name: "tab-2",
+
+  data() {
+    return {};
+  },
+  methods: {
+
+  },
+  components: {
+    HeaderContainer
+  },
+}
 
 </script>

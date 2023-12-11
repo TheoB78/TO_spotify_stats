@@ -6,6 +6,11 @@ const clientSecret = '051e53ad68a94602bacf3152c92989fd';
 const redirectUri = 'http://localhost:8100/tabs';
 const codeVerifier = generateRandomString(64);
 
+function resetToLogin() {
+    localStorage.clear();
+    router.push('/login');
+}
+
 function generateRandomString(length: number) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -40,6 +45,7 @@ function getCodeFromUrl() {
 };
 
 async function requestUserAuth() {
+    console.log("requestuserauth");
     const hashed = await sha256(codeVerifier);
     const codeChallenge = base64encode(hashed);
     
@@ -58,6 +64,7 @@ async function requestUserAuth() {
 };
 
 async function getAccessToken() {
+    console.log("getaccestoken");
     const code = getCodeFromUrl();
     localStorage.setItem('authorization_code', code);
     
@@ -91,6 +98,7 @@ async function getAccessToken() {
 };
 
 async function getRefreshToken() {
+    console.log("getrefresh");
     const refreshToken = localStorage.getItem('refresh_token')
     
     try {
@@ -119,8 +127,9 @@ async function getRefreshToken() {
 };
 
 function checkAuthorization() {
+    console.log("checkAuthorization");
     if (!localStorage.getItem('authorization_code')) {
-        router.push('/login');
+        resetToLogin();
     }
     else if (!localStorage.getItem('access_token')) {
         getAccessToken();
@@ -129,13 +138,15 @@ function checkAuthorization() {
 
 function apiCallErrorHandler(error: any) {
     console.log(error)
+    alert(error.message)
     if (error.response.data.error == 'invalid_grant') {
-        alert('Bad authorization code');
-        localStorage.clear();
-        router.push('/login');
+        resetToLogin();
     }
-    else if (error.status = 401) {
-        getRefreshToken()
+    else if (error.response.status == 401) {
+        getRefreshToken();
+    }
+    else {
+        resetToLogin();
     }
 }
 
@@ -145,4 +156,5 @@ export default {
     getRefreshToken,
     checkAuthorization,
     apiCallErrorHandler,
+    resetToLogin,
 }

@@ -39,7 +39,7 @@ export default {
     },
     components: {
         HeaderContainer,
-        IonPage,
+        IonPage
     },
 }
 </script>
