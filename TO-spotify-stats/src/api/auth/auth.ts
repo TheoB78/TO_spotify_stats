@@ -54,7 +54,7 @@ async function requestUserAuth() {
     let args = new URLSearchParams({
         response_type: 'code',
         client_id: clientId,
-        scope: 'user-read-private user-read-email',
+        scope: 'user-top-read user-read-private user-read-email',
         redirect_uri: redirectUri,
         code_challenge_method: 'S256',
         code_challenge: codeChallenge

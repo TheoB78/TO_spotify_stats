@@ -34,9 +34,6 @@ export default {
         }
 
     },
-    setup() {
-        
-    },
     components: {
         HeaderContainer,
         IonPage

@@ -18,7 +18,8 @@ export default {
 
   },
   components: {
-    HeaderContainer
+    HeaderContainer,
+    IonPage
   },
 }
 

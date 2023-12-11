@@ -18,10 +18,10 @@ class track {
 async function getTopTracks() {
     
     try {
-        await axios.get('https://api.spotify.comv1/me/top/tracks?', 
+        await axios.get('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5', 
         {
             headers : {
-                'Authorization' : `Bearera sdf ${localStorage.getItem('access_token')}`,
+                'Authorization' : `Bearer ${localStorage.getItem('access_token')}`,
             }
         }).then((response) => {
         }

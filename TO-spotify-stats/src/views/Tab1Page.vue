@@ -43,9 +43,6 @@ export default {
         getTopTracks() {
             api.track.getTopTracks();
         },
-        alertHI() {
-          alert('hi')
-        }
     },
     mounted() {
         api.auth.checkAuthorization();
