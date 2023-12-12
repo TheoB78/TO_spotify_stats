@@ -98,7 +98,7 @@ async function getAccessToken() {
     }
 };
 
-async function getRefreshToken() {
+async function refreshToken(callBack: any = undefined) {
     console.log("getrefresh");
     const refreshToken = localStorage.getItem('refresh_token')
     
@@ -118,6 +118,9 @@ async function getRefreshToken() {
             console.log(response);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
+            // if (callBack) {
+            //     callBack;
+            // }
         }).catch((error) => {
             apiCallErrorHandler(error);
         })
@@ -127,24 +130,24 @@ async function getRefreshToken() {
     }
 };
 
-function apiCallErrorHandler(error: any) {
+function apiCallErrorHandler(error: any, callBack: any = undefined) {
     console.log(error)
-    alert(error.message)
     if (error.response.data.error == 'invalid_grant') {
         resetToLogin();
     }
     else if (error.response.status == 401) {
-        getRefreshToken();
+        alert('it does it :O')
+        refreshToken(callBack);
     }
     else {
         resetToLogin();
     }
-}
+};
 
 export default {
     requestUserAuth,
     getAccessToken,
-    getRefreshToken,
+    getRefreshToken: refreshToken,
     apiCallErrorHandler,
     resetToLogin,
 }
