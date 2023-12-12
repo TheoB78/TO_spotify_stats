@@ -34,9 +34,6 @@
                 placeholder="Your name"
                 ></ion-input>
               </ion-item>
-              <ion-item>
-                <ion-datetime presentation="month-year"></ion-datetime>
-              </ion-item>
             </ion-content>
           </ion-modal>
         </ion-item>
@@ -49,7 +46,7 @@
       </ion-list>
       <ion-list>
         <ion-item v-for="item in items">
-          Name = {{ item.name }}
+          <Track :name="item.name" :artists="item.artists.toString()" :album="item.album" :image="item.image"/>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -57,10 +54,11 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSelect, IonList, IonModal, IonDatetime } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSelect, IonList, IonModal } from '@ionic/vue';
 import { ref } from 'vue';
 import { OverlayEventDetail } from '@ionic/core/components'
 import HeaderContainer from '@/components/HeaderContainer.vue';
+import Track from '@/components/track.vue';
 import api from '@/api/api';
 
 let items = ref();
@@ -71,7 +69,7 @@ function getRefreshToken() {
 
 function  getTopTracks() {
   api.track.getTopTracks().then( response => items.value = response);
-
+  
 };
 
 const message = ref('This modal example uses triggers to automatically open a modal when the button is clicked.');

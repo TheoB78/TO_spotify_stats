@@ -35,7 +35,7 @@ async function getTopTracks() {
                 let name = item.name;
                 let artists = [];
                 let album = item.album.name;
-                let image = item.album.images[2];
+                let image = item.album.images[0].url;
                 let genres = [''];
                 for (let artist of item.artists)
                     artists.push(artist.name)
@@ -45,7 +45,7 @@ async function getTopTracks() {
             console.log(tracks)
         }
         ).catch((error) => {
-            auth.apiCallErrorHandler(error)
+            auth.apiCallErrorHandler(error, getTopTracks())
         })
      } catch (error: any) {
         console.error('Error fetching users:', error.message);
