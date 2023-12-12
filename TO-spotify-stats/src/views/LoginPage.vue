@@ -30,7 +30,6 @@ export default {
     methods: {
         requesUserAuth() {
             api.auth.requestUserAuth();
-            api.auth.getAccessToken();
         }
 
     },

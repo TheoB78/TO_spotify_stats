@@ -24,6 +24,7 @@ async function getTopTracks() {
                 'Authorization' : `Bearer ${localStorage.getItem('access_token')}`,
             }
         }).then((response) => {
+            console.log(response)
         }
         ).catch((error) => {
             alert('errororororo')

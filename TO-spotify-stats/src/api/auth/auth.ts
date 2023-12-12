@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const clientId = '16dc2375b35a42afa791924a4e4eaa5d';
 const clientSecret = '051e53ad68a94602bacf3152c92989fd';
-const redirectUri = 'http://localhost:8100/tabs';
+const redirectUri = 'http://localhost:8100/loggingIn';
 const codeVerifier = generateRandomString(64);
 
 function resetToLogin() {
@@ -87,6 +87,7 @@ async function getAccessToken() {
             console.log(response);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
+            router.push('/tabs')
         }).catch((error) => {
             apiCallErrorHandler(error);
         }
@@ -126,16 +127,6 @@ async function getRefreshToken() {
     }
 };
 
-function checkAuthorization() {
-    console.log("checkAuthorization");
-    if (!localStorage.getItem('authorization_code')) {
-        resetToLogin();
-    }
-    else if (!localStorage.getItem('access_token')) {
-        getAccessToken();
-    }
-}
-
 function apiCallErrorHandler(error: any) {
     console.log(error)
     alert(error.message)
@@ -154,7 +145,6 @@ export default {
     requestUserAuth,
     getAccessToken,
     getRefreshToken,
-    checkAuthorization,
     apiCallErrorHandler,
     resetToLogin,
 }

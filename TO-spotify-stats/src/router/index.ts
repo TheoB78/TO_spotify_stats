@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TabsPage from '../views/TabsPage.vue';
-import LoginPage from '../views/LoginPage.vue'
+import LoginPage from '../views/LoginPage.vue';
+import LoggingInPage from '../views/LoggingInPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,6 +12,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     component: LoginPage
+  },
+  {
+    path: '/loggingIn',
+    component: LoggingInPage
   },
   {
     path: '/tabs/',
@@ -34,11 +39,22 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const authCode = localStorage.getItem("authorization_code");
+  const token = localStorage.getItem('access_token');
+  
+  if (!authCode && (to.path != '/login' && to.path != '/loggingIn')) {
+    next('/login');
+  } else {
+    next();
+  }
+});
 
 export default router
