@@ -2,7 +2,7 @@
   <ion-page id="main-content">
     <HeaderContainer name="Top Items"/>
     <ion-content :fullscreen="true">
-      <ion-list>
+      <ion-list inset>
         <ion-item>
           <ion-select label="Search parameter" placeholder="Select Item">
             <ion-select-option value="track">Track</ion-select-option>
@@ -44,9 +44,9 @@
           <ion-button @click="getRefreshToken">token</ion-button>
         </ion-item>
       </ion-list>
-      <ion-list>
+      <ion-list lines="none" inset>
         <ion-item v-for="item in items">
-          <Track :name="item.name" :artists="item.artists.toString()" :album="item.album" :image="item.image"/>
+          <TrackComponent :name="item.name" :artists="item.artists.toString()" :album="item.album" :image="item.image"/>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -58,7 +58,7 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSelect, IonLis
 import { ref } from 'vue';
 import { OverlayEventDetail } from '@ionic/core/components'
 import HeaderContainer from '@/components/HeaderContainer.vue';
-import Track from '@/components/track.vue';
+import TrackComponent from '@/components/TrackComponent.vue';
 import api from '@/api/api';
 
 let items = ref();

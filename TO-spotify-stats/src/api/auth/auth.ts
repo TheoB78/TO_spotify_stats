@@ -99,9 +99,9 @@ async function getAccessToken() {
 };
 
 async function refreshToken(callBack: any = undefined) {
+    debugger
     console.log("getrefresh");
-    const refreshToken = localStorage.getItem('refresh_token')
-    
+    const refreshToken = localStorage.getItem('refresh_token');
     try {
         await axios.post('https://accounts.spotify.com/api/token', 
         {
@@ -115,14 +115,16 @@ async function refreshToken(callBack: any = undefined) {
                 'Content-Type' : 'application/x-www-form-urlencoded',
             }
         }).then((response) => {
+            debugger
             console.log(response);
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('refresh_token', response.data.refresh_token);
-            // if (callBack) {
-            //     callBack;
-            // }
+            if (callBack) {
+                callBack(false);
+            }
         }).catch((error) => {
-            apiCallErrorHandler(error);
+            console.log(error);
+            resetToLogin();
         })
     }
     catch (error: any) {
@@ -130,18 +132,19 @@ async function refreshToken(callBack: any = undefined) {
     }
 };
 
-function apiCallErrorHandler(error: any, callBack: any = undefined) {
+async function apiCallErrorHandler(error: any) {
     console.log(error)
-    if (error.response.data.error == 'invalid_grant') {
-        resetToLogin();
-    }
-    else if (error.response.status == 401) {
-        alert('it does it :O')
-        refreshToken(callBack);
-    }
-    else {
-        resetToLogin();
-    }
+    // if (error.response.data.error == 'invalid_grant') {
+    //     resetToLogin();
+    // }
+    // else if (error.response.status == 401) {
+    //     alert('it does it :O')
+    //     await refreshToken(callBack);
+    // }
+    // else {
+    //     resetToLogin();
+    // }
+    resetToLogin();
 };
 
 export default {

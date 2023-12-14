@@ -17,19 +17,17 @@ class track {
     }
 }
 
-async function getTopTracks() {
+async function getTopTracks(retry: boolean = true) {
     let tracks: Array<track> = [];
 
     try {
-        await axios.get('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5', 
+        await axios.get('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50', 
         {
             headers : {
                 'Authorization' : `Bearer ${localStorage.getItem('access_token')}`,
             }
         }).then((response) => {
             console.log(response);
-            
-            debugger
 
             for (let item of response.data.items) {
                 let name = item.name;
@@ -45,7 +43,9 @@ async function getTopTracks() {
             console.log(tracks)
         }
         ).catch((error) => {
-            auth.apiCallErrorHandler(error, getTopTracks())
+            // let callback: (retry: boolean) => void = getTopTracks;
+            auth.getRefreshToken();
+
         })
      } catch (error: any) {
         console.error('Error fetching users:', error.message);
